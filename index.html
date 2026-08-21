@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GOON SUB EMPIRE — Interactive Hub</title>
 <link rel="stylesheet" href="style.css">
+<style>html,body{background:#0b0b10!important;}</style>
 </head>
 <body>
 <header>
@@ -27,6 +28,7 @@
     <div class="stat-bar">
       <div>Actions this session: <span id="stat-session">0</span></div>
       <div>Tabs opened: <span id="stat-tabs">0</span></div>
+      <button class="btn btn-secondary" style="padding:6px 12px;font-size:0.9rem" onclick="resetStats()">Reset Counters</button>
     </div>
 
     <div class="btn-row">
@@ -45,8 +47,11 @@
 
     <div class="audio-controls">
       <button class="btn btn-secondary" id="audio-btn" onclick="toggleAudio()">Start Ambient Drone</button>
-      <span style="color:#888;font-size:0.9rem">(very quiet low tone for long sessions)</span>
+      <label style="color:#aaa;font-size:0.95rem">Volume:
+        <input type="range" min="0.02" max="0.35" step="0.01" value="0.14" oninput="setDroneVolume(this.value)" style="vertical-align:middle;width:120px">
+      </label>
     </div>
+    <p class="note">Drone is louder now. First time you use multi-tab buttons, allow popups when the browser asks.</p>
 
     <div id="log"></div>
   </div>
@@ -71,26 +76,27 @@
       <li>Visit category pages for focused deep dives</li>
       <li>Download the full lists so you have them offline</li>
       <li>Leave this hub open as your command center</li>
-      <li>The ambient drone is optional brain-melt background</li>
+      <li>Turn the drone on + raise volume for brain-melt background</li>
+      <li>Reset counters anytime if you want a fresh session number</li>
     </ul>
   </div>
 
   <div class="panel">
-    <h2>LIVE COUNT OF YOUR SUBS</h2>
-    <p>Feet: 9 &nbsp;|&nbsp; Booty/Ass: 7 &nbsp;|&nbsp; Femboy: 19 &nbsp;|&nbsp; Futa: 5 &nbsp;|&nbsp; Goon: 5 &nbsp;|&nbsp; General: 21</p>
-    <p style="color:var(--accent2);margin-top:8px">Total curated: 66+ subreddits ready</p>
+    <h2>LIVE COUNT OF YOUR SUBS (+ EXTRA HENTAI)</h2>
+    <p>Feet • Booty • Femboy • Futa • Goon • General (now includes many more pure hentai subs: MonsterGirl, netorare, ahegao, yuri, wholesomehentai, HentaiSource, captions, petplay, schoolgirl, milf, etc.)</p>
+    <p style="color:var(--accent2);margin-top:8px">Total curated: 90+ subreddits ready</p>
   </div>
 </main>
 
 <footer>
-  GOON SUB EMPIRE — built from your personal list<br>
+  GOON SUB EMPIRE — built from your personal list + extra hentai suggestions<br>
   Interactive tools + downloadable archives + multi-page deep dives<br>
   Stay in the empire.
 </footer>
 
 <script src="app.js"></script>
 <script>
-  log('Empire online. Ready when you are.');
+  log('Empire online (v3). Louder drone + more hentai subs loaded.');
 </script>
 </body>
 </html>
