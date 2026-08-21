@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg: #0b0b10;
+  --panel: #12121c;
+  --accent: #ff2d78;
+  --accent2: #00f0ff;
+  --text: #e8e8ff;
+  --muted: #8888aa;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* subtle animated bg */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 20%, #ff2d7815 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, #00f0ff10 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+header {
+  background: linear-gradient(90deg, #1a0a14, #0a121a);
+  border-bottom: 2px solid var(--accent);
+  padding: 22px 20px;
+  text-align: center;
+  position: relative;
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-shadow: 0 0 20px #ff2d7888;
+}
+
+.tagline {
+  color: var(--accent2);
+  font-size: 1rem;
+  margin-top: 6px;
+  letter-spacing: 2px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  background: #0e0e16;
+  border-bottom: 1px solid #ff2d7844;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 8px 14px;
+  border: 1px solid #ff2d7855;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: 0.15s;
+}
+
+nav a:hover, nav a.active {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}
+
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 30px 18px 80px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid #ff2d7833;
+  border-radius: 10px;
+  padding: 22px;
+  margin-bottom: 28px;
+}
+
+h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.25rem;
+  color: var(--accent2);
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+}
+
+h3 {
+  color: var(--accent);
+  margin: 18px 0 10px;
+  font-size: 1.15rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.sub-card {
+  background: #0a0a12;
+  border: 1px solid #ff2d7844;
+  padding: 14px;
+  border-radius: 8px;
+  transition: 0.15s;
+  cursor: pointer;
+}
+
+.sub-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px #ff2d7844;
+  transform: translateY(-2px);
+}
+
+.sub-card a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  display: block;
+}
+
+.sub-card .desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.btn {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  padding: 12px 20px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.15s;
+}
+
+.btn:hover {
+  background: #ff5a9a;
+  box-shadow: 0 0 18px #ff2d7888;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--accent2);
+  color: var(--accent2);
+}
+
+.btn-secondary:hover {
+  background: var(--accent2);
+  color: #000;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.stat-bar {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+  font-size: 1.1rem;
+}
+
+.stat-bar span {
+  color: var(--accent2);
+}
+
+#log {
+  background: #08080e;
+  border: 1px solid #333;
+  padding: 12px;
+  height: 140px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 12px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #555;
+  border-top: 1px solid #ff2d7822;
+  font-size: 0.9rem;
+}
+
+.download-box {
+  background: #0a1210;
+  border: 1px dashed var(--accent2);
+  padding: 18px;
+  margin: 12px 0;
+}
+
+.download-box pre {
+  white-space: pre-wrap;
+  font-size: 0.85rem;
+  color: #8f8;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+@media (max-width: 600px) {
+  h1 { font-size: 1.3rem; }
+  .grid { grid-template-columns: 1fr; }
+}

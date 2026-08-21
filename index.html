@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOON SUB EMPIRE — Interactive Hub</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>GOON SUB EMPIRE</h1>
+  <div class="tagline">YOUR PERSONAL INTERACTIVE HENTAI / FEMBOY / FEET / ASS COMMAND CENTER</div>
+</header>
+
+<nav>
+  <a href="index.html" class="active">HUB</a>
+  <a href="feet.html">FEET</a>
+  <a href="booty.html">BOOTY / ASS</a>
+  <a href="femboy.html">FEMBOY + FUTA</a>
+  <a href="goon.html">GOONING</a>
+  <a href="downloads.html">DOWNLOADS</a>
+</nav>
+
+<main>
+  <div class="panel">
+    <h2>SESSION DASHBOARD</h2>
+    <div class="stat-bar">
+      <div>Actions this session: <span id="stat-session">0</span></div>
+      <div>Tabs opened: <span id="stat-tabs">0</span></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" onclick="openRandom('all')">RANDOM SUB (ANY)</button>
+      <button class="btn" onclick="openMultiple('all', 5)">OPEN 5 RANDOM TABS</button>
+      <button class="btn btn-secondary" onclick="openMultiple('all', 10)">OPEN 10 TABS (CHAOS)</button>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" onclick="openRandom('feet')">Random Feet</button>
+      <button class="btn" onclick="openRandom('booty')">Random Booty</button>
+      <button class="btn" onclick="openRandom('femboy')">Random Femboy</button>
+      <button class="btn" onclick="openRandom('futa')">Random Futa</button>
+      <button class="btn" onclick="openRandom('goon')">Random Goon</button>
+    </div>
+
+    <div class="audio-controls">
+      <button class="btn btn-secondary" id="audio-btn" onclick="toggleAudio()">Start Ambient Drone</button>
+      <span style="color:#888;font-size:0.9rem">(very quiet low tone for long sessions)</span>
+    </div>
+
+    <div id="log"></div>
+  </div>
+
+  <div class="panel">
+    <h2>QUICK CATEGORY JUMPS</h2>
+    <p style="color:#aaa;margin-bottom:12px">Each category page has the full list + more tools.</p>
+    <div class="btn-row">
+      <a href="feet.html"><button class="btn">FEET VAULT →</button></a>
+      <a href="booty.html"><button class="btn">BOOTY / ASS →</button></a>
+      <a href="femboy.html"><button class="btn">FEMBOY + FUTA →</button></a>
+      <a href="goon.html"><button class="btn">GOONING ZONE →</button></a>
+      <a href="downloads.html"><button class="btn btn-secondary">DOWNLOAD LISTS →</button></a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>HOW TO USE THIS EMPIRE</h2>
+    <ul style="margin-left:20px;color:#ccc">
+      <li>Use the random buttons to keep novelty high</li>
+      <li>Open 5–10 tabs when you feel the session slowing</li>
+      <li>Visit category pages for focused deep dives</li>
+      <li>Download the full lists so you have them offline</li>
+      <li>Leave this hub open as your command center</li>
+      <li>The ambient drone is optional brain-melt background</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2>LIVE COUNT OF YOUR SUBS</h2>
+    <p>Feet: 9 &nbsp;|&nbsp; Booty/Ass: 7 &nbsp;|&nbsp; Femboy: 19 &nbsp;|&nbsp; Futa: 5 &nbsp;|&nbsp; Goon: 5 &nbsp;|&nbsp; General: 21</p>
+    <p style="color:var(--accent2);margin-top:8px">Total curated: 66+ subreddits ready</p>
+  </div>
+</main>
+
+<footer>
+  GOON SUB EMPIRE — built from your personal list<br>
+  Interactive tools + downloadable archives + multi-page deep dives<br>
+  Stay in the empire.
+</footer>
+
+<script src="app.js"></script>
+<script>
+  log('Empire online. Ready when you are.');
+</script>
+</body>
+</html>
