@@ -1,4 +1,4 @@
-// Goon Sub Empire - v4 (persistent louder drone + big features)
+// Goon Sub Empire v5
 
 const allSubs = {
   feet: [
@@ -106,217 +106,175 @@ const allSubs = {
   ]
 };
 
-// ========== STATS ==========
-let sessionCount = 0;
-let tabsOpened = 0;
-
-function loadStats() {
-  try {
-    sessionCount = parseInt(localStorage.getItem('goon_session') || '0', 10);
-    tabsOpened = parseInt(localStorage.getItem('goon_tabs') || '0', 10);
-  } catch(e) { sessionCount = 0; tabsOpened = 0; }
-}
-function saveStats() {
-  try {
-    localStorage.setItem('goon_session', sessionCount);
-    localStorage.setItem('goon_tabs', tabsOpened);
-  } catch(e) {}
-}
+let sessionCount = 0, tabsOpened = 0;
+function loadStats(){try{sessionCount=parseInt(localStorage.getItem('goon_session')||'0',10);tabsOpened=parseInt(localStorage.getItem('goon_tabs')||'0',10)}catch(e){}}
+function saveStats(){try{localStorage.setItem('goon_session',sessionCount);localStorage.setItem('goon_tabs',tabsOpened)}catch(e){}}
 loadStats();
 
-function log(msg) {
-  const el = document.getElementById('log');
-  if (!el) return;
-  const time = new Date().toLocaleTimeString();
-  el.innerHTML = `[${time}] ${msg}<br>` + el.innerHTML;
+function log(msg){const el=document.getElementById('log');if(!el)return;el.innerHTML=`[${new Date().toLocaleTimeString()}] ${msg}<br>`+el.innerHTML}
+
+function openSub(url,name){
+  const w=window.open(url,'_blank');
+  if(w){tabsOpened++;sessionCount++;saveStats();updateStats();log('Opened '+name);return true}
+  else{log('BLOCKED: '+name);return false}
 }
 
-function openSub(url, name) {
-  const w = window.open(url, '_blank');
-  if (w) {
-    tabsOpened++;
-    sessionCount++;
-    saveStats();
-    updateStats();
-    log(`Opened ${name}`);
-  } else {
-    log(`BLOCKED: ${name} — allow popups!`);
+function updateStats(){
+  const s=document.getElementById('stat-session'),t=document.getElementById('stat-tabs');
+  if(s)s.textContent=sessionCount;if(t)t.textContent=tabsOpened;
+  updateGoonMeter();
+}
+function resetStats(){sessionCount=0;tabsOpened=0;saveStats();updateStats();log('Counters reset')}
+
+function randomFrom(a){return a[Math.floor(Math.random()*a.length)]}
+
+function openRandom(cat){
+  let pool=cat==='all'?[].concat(...Object.values(allSubs)):(allSubs[cat]||[]);
+  if(!pool.length)return;
+  openSub(randomFrom(pool).url,randomFrom(pool).name);
+}
+
+function openMultiple(cat,count){
+  let pool=cat==='all'?[].concat(...Object.values(allSubs)):(allSubs[cat]||[]);
+  pool=[...pool].sort(()=>Math.random()-0.5).slice(0,Math.min(count,pool.length));
+  log('Trying to launch '+pool.length+' tabs...');
+  let opened=0;
+  pool.forEach((p,i)=>{
+    setTimeout(()=>{if(openSub(p.url,p.name))opened++},i*500);
+  });
+  // fallback list after a short delay
+  setTimeout(()=>showFallbackList(pool),pool.length*500+300);
+}
+
+function showFallbackList(picks){
+  const box=document.getElementById('fallback-box');
+  if(!box)return;
+  box.style.display='block';
+  box.innerHTML='<h3 style="color:var(--accent2);margin-bottom:10px">CLICK THESE MANUALLY (popup blockers stop auto-open)</h3>';
+  picks.forEach(p=>{
+    const a=document.createElement('a');
+    a.href=p.url;a.target='_blank';a.textContent=p.name;
+    a.style.cssText='display:inline-block;margin:4px 8px 4px 0;padding:6px 10px;background:#1a1a28;border:1px solid #ff2d78;color:#fff;text-decoration:none;border-radius:4px';
+    a.onclick=()=>{tabsOpened++;sessionCount++;saveStats();updateStats()};
+    box.appendChild(a);
+  });
+  log('Fallback clickable list shown');
+}
+
+function emergencyDeepDive(){
+  const heavy=[...allSubs.goon,...allSubs.femboy.slice(0,8),
+    ...allSubs.general.filter(s=>/netorare|ahegao|helpless|petplay|captions|HentaiLimitless/i.test(s.name))];
+  const picks=[...heavy].sort(()=>Math.random()-0.5).slice(0,9);
+  log('DEEP DIVE ready');
+  openMultipleFromList(picks);
+}
+function softLoop(){
+  const soft=[...allSubs.feet,...allSubs.booty,...allSubs.general.filter(s=>/wholesome|petite|ecchi|Cute/i.test(s.name))];
+  openMultipleFromList([...soft].sort(()=>Math.random()-0.5).slice(0,7));
+}
+function femboyFocus(){openMultipleFromList([...allSubs.femboy].sort(()=>Math.random()-0.5).slice(0,8))}
+
+function openMultipleFromList(picks){
+  log('Launching '+picks.length+'...');
+  picks.forEach((p,i)=>setTimeout(()=>openSub(p.url,p.name),i*480));
+  setTimeout(()=>showFallbackList(picks),picks.length*480+400);
+}
+
+function downloadList(cat){
+  let text=cat==='all'?'=== FULL LIST ===\n\n':'=== '+cat.toUpperCase()+' ===\n\n';
+  if(cat==='all'){for(const[k,list]of Object.entries(allSubs)){text+='\n## '+k+'\n';list.forEach(s=>text+=s.url+'\n')}}
+  else (allSubs[cat]||[]).forEach(s=>text+=s.url+'\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/plain'}));a.download='goon-subs-'+cat+'.txt';a.click();
+  log('Downloaded '+cat);
+}
+
+// ===== DRONE - MUCH LOUDER =====
+let audioCtx=null,oscillator=null,gainNode=null,isPlaying=false,currentVolume=0.45;
+
+function loadDronePrefs(){
+  try{
+    const v=localStorage.getItem('goon_drone_vol');if(v)currentVolume=parseFloat(v);
+    if(localStorage.getItem('goon_drone_on')==='1')setTimeout(()=>{if(!isPlaying)toggleAudio(true)},500);
+  }catch(e){}
+}
+function saveDronePrefs(){try{localStorage.setItem('goon_drone_vol',currentVolume);localStorage.setItem('goon_drone_on',isPlaying?'1':'0')}catch(e){}}
+
+function toggleAudio(forceOn){
+  if(!audioCtx){
+    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    oscillator=audioCtx.createOscillator();
+    gainNode=audioCtx.createGain();
+    oscillator.type='sine';oscillator.frequency.value=46;
+    gainNode.gain.value=currentVolume;
+    oscillator.connect(gainNode);gainNode.connect(audioCtx.destination);
+    oscillator.start();isPlaying=true;
+  }else{
+    if(isPlaying&&!forceOn){gainNode.gain.value=0;isPlaying=false}
+    else{gainNode.gain.value=currentVolume;isPlaying=true}
   }
-}
-
-function updateStats() {
-  const s = document.getElementById('stat-session');
-  const t = document.getElementById('stat-tabs');
-  if (s) s.textContent = sessionCount;
-  if (t) t.textContent = tabsOpened;
-}
-
-function resetStats() {
-  sessionCount = 0;
-  tabsOpened = 0;
-  saveStats();
-  updateStats();
-  log('Counters reset');
-}
-
-function randomFrom(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function openRandom(category) {
-  let pool = category === 'all' ? [].concat(...Object.values(allSubs)) : (allSubs[category] || []);
-  if (!pool.length) return;
-  const pick = randomFrom(pool);
-  openSub(pick.url, pick.name);
-}
-
-function openMultiple(category, count) {
-  let pool = category === 'all' ? [].concat(...Object.values(allSubs)) : (allSubs[category] || []);
-  pool = [...pool].sort(() => Math.random() - 0.5);
-  const picks = pool.slice(0, Math.min(count, pool.length));
-  log(`Launching ${picks.length} tabs... Allow popups!`);
-  picks.forEach((p, i) => setTimeout(() => openSub(p.url, p.name), i * 450));
-}
-
-// Big curated deep-dive sets
-function emergencyDeepDive() {
-  const heavy = [
-    ...allSubs.goon,
-    ...allSubs.femboy.slice(0, 6),
-    ...allSubs.general.filter(s => /netorare|ahegao|helpless|petplay|captions/i.test(s.name))
-  ];
-  const picks = [...heavy].sort(() => Math.random() - 0.5).slice(0, 8);
-  log('EMERGENCY DEEP DIVE — 8 heavy tabs incoming');
-  picks.forEach((p, i) => setTimeout(() => openSub(p.url, p.name), i * 400));
-}
-
-function softLoop() {
-  const soft = [...allSubs.feet, ...allSubs.booty, ...allSubs.general.filter(s => /wholesome|petite|ecchi|Cute/i.test(s.name))];
-  const picks = [...soft].sort(() => Math.random() - 0.5).slice(0, 6);
-  log('Soft loop — 6 easy tabs');
-  picks.forEach((p, i) => setTimeout(() => openSub(p.url, p.name), i * 400));
-}
-
-function femboyFocus() {
-  openMultiple('femboy', 7);
-}
-
-function downloadList(category) {
-  let text = '';
-  if (category === 'all') {
-    text = '=== FULL GOON SUB EMPIRE LIST ===\n\n';
-    for (const [cat, list] of Object.entries(allSubs)) {
-      text += `\n## ${cat.toUpperCase()}\n`;
-      list.forEach(s => text += s.url + '\n');
-    }
-  } else {
-    text = `=== ${category.toUpperCase()} ===\n\n`;
-    (allSubs[category] || []).forEach(s => text += s.url + '\n');
-  }
-  text += '\n\nGenerated by Goon Sub Empire';
-  const blob = new Blob([text], {type: 'text/plain'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `goon-subs-${category}.txt`;
-  a.click();
-  log(`Downloaded ${category}`);
-}
-
-// ========== PERSISTENT LOUDER DRONE ==========
-let audioCtx = null;
-let oscillator = null;
-let gainNode = null;
-let isPlaying = false;
-let currentVolume = 0.28; // much louder default
-
-function loadDronePrefs() {
-  try {
-    const vol = localStorage.getItem('goon_drone_vol');
-    if (vol) currentVolume = parseFloat(vol);
-    const wantOn = localStorage.getItem('goon_drone_on') === '1';
-    if (wantOn) {
-      // slight delay so page is ready
-      setTimeout(() => { if (!isPlaying) toggleAudio(true); }, 400);
-    }
-  } catch(e) {}
-}
-
-function saveDronePrefs() {
-  try {
-    localStorage.setItem('goon_drone_vol', currentVolume);
-    localStorage.setItem('goon_drone_on', isPlaying ? '1' : '0');
-  } catch(e) {}
-}
-
-function toggleAudio(forceOn) {
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    oscillator = audioCtx.createOscillator();
-    gainNode = audioCtx.createGain();
-    oscillator.type = 'sine';
-    oscillator.frequency.value = 48;
-    gainNode.gain.value = currentVolume;
-    oscillator.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-    oscillator.start();
-    isPlaying = true;
-  } else {
-    if (isPlaying && !forceOn) {
-      gainNode.gain.value = 0;
-      isPlaying = false;
-    } else {
-      gainNode.gain.value = currentVolume;
-      isPlaying = true;
-    }
-  }
-  const btn = document.getElementById('audio-btn');
-  if (btn) btn.textContent = isPlaying ? 'Stop Ambient Drone' : 'Start Ambient Drone';
+  const btn=document.getElementById('audio-btn');
+  if(btn)btn.textContent=isPlaying?'Stop Ambient Drone':'Start Ambient Drone';
   saveDronePrefs();
-  log(isPlaying ? 'Drone ON (persistent + loud)' : 'Drone muted');
+  log(isPlaying?'Drone ON — volume '+Math.round(currentVolume*100)+'%':'Drone off');
 }
 
-function setDroneVolume(val) {
-  currentVolume = parseFloat(val);
-  if (gainNode && isPlaying) gainNode.gain.value = currentVolume;
+function setDroneVolume(val){
+  currentVolume=parseFloat(val);
+  if(gainNode&&isPlaying)gainNode.gain.value=currentVolume;
   saveDronePrefs();
-  const label = document.getElementById('vol-label');
-  if (label) label.textContent = Math.round(currentVolume * 100) + '%';
+  const label=document.getElementById('vol-label');
+  if(label)label.textContent=Math.round(currentVolume*100)+'%';
 }
 
-function renderCards(category, containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  const list = allSubs[category] || [];
-  container.innerHTML = '';
-  list.forEach(sub => {
-    const div = document.createElement('div');
-    div.className = 'sub-card';
-    div.onclick = () => openSub(sub.url, sub.name);
-    div.innerHTML = `<a href="${sub.url}" target="_blank" onclick="event.stopPropagation()">${sub.name}</a>
-                     <div class="desc">Click to open</div>`;
-    container.appendChild(div);
+// Goon Meter (visual addiction bar)
+function updateGoonMeter(){
+  const el=document.getElementById('goon-meter-fill');
+  if(!el)return;
+  const level=Math.min(100, Math.floor(tabsOpened*1.8 + sessionCount*0.8));
+  el.style.width=level+'%';
+  el.textContent=level+'%';
+  if(level>70)el.style.background='linear-gradient(90deg,#ff0044,#ff2d78)';
+}
+
+// Rotating mantras
+const mantras=[
+  'Just one more tab...',
+  'You can stop whenever you want (you won’t)',
+  'Deeper is better',
+  'The real world can wait',
+  'Stay in the session',
+  'More tabs = more goon',
+  'Resistance is temporary',
+  'This is the good part',
+  'Don’t close anything yet',
+  'You’re doing so well'
+];
+function rotateMantra(){
+  const el=document.getElementById('mantra');
+  if(el)el.textContent=mantras[Math.floor(Math.random()*mantras.length)];
+}
+
+function renderCards(cat,id){
+  const c=document.getElementById(id);if(!c)return;
+  c.innerHTML='';
+  (allSubs[cat]||[]).forEach(sub=>{
+    const d=document.createElement('div');d.className='sub-card';
+    d.onclick=()=>openSub(sub.url,sub.name);
+    d.innerHTML=`<a href="${sub.url}" target="_blank" onclick="event.stopPropagation()">${sub.name}</a><div class="desc">Click to open</div>`;
+    c.appendChild(d);
   });
 }
 
-// Session timer
-let sessionStart = parseInt(localStorage.getItem('goon_start') || Date.now(), 10);
-function updateTimer() {
-  const el = document.getElementById('session-timer');
-  if (!el) return;
-  const mins = Math.floor((Date.now() - sessionStart) / 60000);
-  el.textContent = mins + ' min';
+let sessionStart=parseInt(localStorage.getItem('goon_start')||Date.now(),10);
+function updateTimer(){
+  const el=document.getElementById('session-timer');
+  if(el)el.textContent=Math.floor((Date.now()-sessionStart)/60000)+' min';
 }
-function resetTimer() {
-  sessionStart = Date.now();
-  localStorage.setItem('goon_start', sessionStart);
-  updateTimer();
-  log('Session timer reset');
-}
+function resetTimer(){sessionStart=Date.now();localStorage.setItem('goon_start',sessionStart);updateTimer();log('Timer reset')}
 
-document.addEventListener('DOMContentLoaded', () => {
-  loadStats();
-  updateStats();
-  loadDronePrefs();
-  updateTimer();
-  setInterval(updateTimer, 30000);
+document.addEventListener('DOMContentLoaded',()=>{
+  loadStats();updateStats();loadDronePrefs();updateTimer();
+  setInterval(updateTimer,20000);
+  setInterval(rotateMantra,12000);
+  rotateMantra();
 });
