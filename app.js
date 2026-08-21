@@ -1,4 +1,4 @@
-// Goon Sub Empire - interactive logic
+// Goon Sub Empire - interactive logic (fixed)
 
 const allSubs = {
   feet: [
@@ -81,8 +81,27 @@ const allSubs = {
   ]
 };
 
+// Persist counters across pages
+function loadStats() {
+  try {
+    sessionCount = parseInt(localStorage.getItem('goon_session') || '0', 10);
+    tabsOpened = parseInt(localStorage.getItem('goon_tabs') || '0', 10);
+  } catch(e) {
+    sessionCount = 0;
+    tabsOpened = 0;
+  }
+}
+
+function saveStats() {
+  try {
+    localStorage.setItem('goon_session', sessionCount);
+    localStorage.setItem('goon_tabs', tabsOpened);
+  } catch(e) {}
+}
+
 let sessionCount = 0;
 let tabsOpened = 0;
+loadStats();
 
 function log(msg) {
   const el = document.getElementById('log');
@@ -92,11 +111,16 @@ function log(msg) {
 }
 
 function openSub(url, name) {
-  window.open(url, '_blank');
-  tabsOpened++;
-  sessionCount++;
-  updateStats();
-  log(`Opened ${name}`);
+  const w = window.open(url, '_blank');
+  if (w) {
+    tabsOpened++;
+    sessionCount++;
+    saveStats();
+    updateStats();
+    log(`Opened ${name}`);
+  } else {
+    log(`BLOCKED: ${name} — allow popups for this site!`);
+  }
 }
 
 function updateStats() {
@@ -122,15 +146,21 @@ function openRandom(category) {
   openSub(pick.url, pick.name);
 }
 
+// Staggered opens to reduce popup blocker issues
 function openMultiple(category, count) {
   let pool = category === 'all' 
     ? [].concat(...Object.values(allSubs))
     : (allSubs[category] || []);
-  // shuffle
   pool = [...pool].sort(() => Math.random() - 0.5);
   const picks = pool.slice(0, Math.min(count, pool.length));
-  picks.forEach(p => openSub(p.url, p.name));
-  log(`Opened ${picks.length} tabs from ${category}`);
+
+  log(`Launching ${picks.length} tabs (staggered)... Allow popups if asked!`);
+
+  picks.forEach((p, i) => {
+    setTimeout(() => {
+      openSub(p.url, p.name);
+    }, i * 400); // 400ms between each open
+  });
 }
 
 function downloadList(category) {
@@ -167,30 +197,32 @@ function toggleAudio() {
     oscillator = audioCtx.createOscillator();
     gainNode = audioCtx.createGain();
     oscillator.type = 'sine';
-    oscillator.frequency.value = 55; // low drone
+    oscillator.frequency.value = 55;
     gainNode.gain.value = 0.03;
     oscillator.connect(gainNode);
     gainNode.connect(audioCtx.destination);
     oscillator.start();
     isPlaying = true;
-    document.getElementById('audio-btn').textContent = 'Stop Ambient Drone';
+    const btn = document.getElementById('audio-btn');
+    if (btn) btn.textContent = 'Stop Ambient Drone';
     log('Ambient drone started (very quiet low tone)');
   } else {
     if (isPlaying) {
       gainNode.gain.value = 0;
       isPlaying = false;
-      document.getElementById('audio-btn').textContent = 'Start Ambient Drone';
+      const btn = document.getElementById('audio-btn');
+      if (btn) btn.textContent = 'Start Ambient Drone';
       log('Ambient drone muted');
     } else {
       gainNode.gain.value = 0.03;
       isPlaying = true;
-      document.getElementById('audio-btn').textContent = 'Stop Ambient Drone';
+      const btn = document.getElementById('audio-btn');
+      if (btn) btn.textContent = 'Stop Ambient Drone';
       log('Ambient drone resumed');
     }
   }
 }
 
-// render cards for a category page
 function renderCards(category, containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -205,3 +237,9 @@ function renderCards(category, containerId) {
     container.appendChild(div);
   });
 }
+
+// On every page load, refresh the visible counters
+document.addEventListener('DOMContentLoaded', () => {
+  loadStats();
+  updateStats();
+});
