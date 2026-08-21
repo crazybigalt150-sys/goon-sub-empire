@@ -11,8 +11,13 @@
   --muted: #8888aa;
 }
 
+html {
+  background: #0b0b10;
+  color-scheme: dark;
+}
+
 body {
-  background: var(--bg);
+  background: #0b0b10 !important;
   color: var(--text);
   font-family: 'Rajdhani', sans-serif;
   font-size: 18px;
