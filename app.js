@@ -1,4 +1,4 @@
-// Goon Sub Empire - interactive logic (fixed)
+// Goon Sub Empire - interactive logic (v3)
 
 const allSubs = {
   feet: [
@@ -10,7 +10,9 @@ const allSubs = {
     {name:"r/feeth_e_n_t_a_i", url:"https://reddit.com/r/feeth_e_n_t_a_i"},
     {name:"r/hentaifeetlover", url:"https://reddit.com/r/hentaifeetlover"},
     {name:"r/hentaifeetlovers9", url:"https://reddit.com/r/hentaifeetlovers9"},
-    {name:"r/rule34feet", url:"https://reddit.com/r/rule34feet"}
+    {name:"r/rule34feet", url:"https://reddit.com/r/rule34feet"},
+    {name:"r/HentaiFeet", url:"https://reddit.com/r/HentaiFeet"},
+    {name:"r/Anime_Feet", url:"https://reddit.com/r/Anime_Feet"}
   ],
   booty: [
     {name:"r/AnimeAssOnly", url:"https://reddit.com/r/AnimeAssOnly"},
@@ -19,7 +21,9 @@ const allSubs = {
     {name:"r/ChurchofBooty", url:"https://reddit.com/r/ChurchofBooty"},
     {name:"r/RumpHentai", url:"https://reddit.com/r/RumpHentai"},
     {name:"r/thaps", url:"https://reddit.com/r/thaps"},
-    {name:"r/thonghentai", url:"https://reddit.com/r/thonghentai"}
+    {name:"r/thonghentai", url:"https://reddit.com/r/thonghentai"},
+    {name:"r/AnimeAss", url:"https://reddit.com/r/AnimeAss"},
+    {name:"r/hentaibutt", url:"https://reddit.com/r/hentaibutt"}
   ],
   femboy: [
     {name:"r/DominantFemboys", url:"https://reddit.com/r/DominantFemboys"},
@@ -40,21 +44,26 @@ const allSubs = {
     {name:"r/SpicyFemboys", url:"https://reddit.com/r/SpicyFemboys"},
     {name:"r/straightfemboyhentai", url:"https://reddit.com/r/straightfemboyhentai"},
     {name:"r/ThiccFemboiss", url:"https://reddit.com/r/ThiccFemboiss"},
-    {name:"r/traphentai", url:"https://reddit.com/r/traphentai"}
+    {name:"r/traphentai", url:"https://reddit.com/r/traphentai"},
+    {name:"r/femboyhentai", url:"https://reddit.com/r/femboyhentai"},
+    {name:"r/TrapHentai", url:"https://reddit.com/r/TrapHentai"}
   ],
   futa: [
     {name:"r/futaandmore", url:"https://reddit.com/r/futaandmore"},
     {name:"r/futacaptions", url:"https://reddit.com/r/futacaptions"},
     {name:"r/futanari", url:"https://reddit.com/r/futanari"},
     {name:"r/FutanariFuta", url:"https://reddit.com/r/FutanariFuta"},
-    {name:"r/FutanariGifs", url:"https://reddit.com/r/FutanariGifs"}
+    {name:"r/FutanariGifs", url:"https://reddit.com/r/FutanariGifs"},
+    {name:"r/FutaHentai", url:"https://reddit.com/r/FutaHentai"},
+    {name:"r/futanari_hentai", url:"https://reddit.com/r/futanari_hentai"}
   ],
   goon: [
     {name:"r/CringeGoonTards", url:"https://reddit.com/r/CringeGoonTards"},
     {name:"r/CringeSexualGoonSlop", url:"https://reddit.com/r/CringeSexualGoonSlop"},
     {name:"r/GooningHentai", url:"https://reddit.com/r/GooningHentai"},
     {name:"r/HentaiiGooning", url:"https://reddit.com/r/HentaiiGooning"},
-    {name:"r/cringe_porn", url:"https://reddit.com/r/cringe_porn"}
+    {name:"r/cringe_porn", url:"https://reddit.com/r/cringe_porn"},
+    {name:"r/HentaiGooning", url:"https://reddit.com/r/HentaiGooning"}
   ],
   general: [
     {name:"r/anime_hentai", url:"https://reddit.com/r/anime_hentai"},
@@ -77,7 +86,26 @@ const allSubs = {
     {name:"r/Short_Hentai", url:"https://reddit.com/r/Short_Hentai"},
     {name:"r/SmallBreastHentai", url:"https://reddit.com/r/SmallBreastHentai"},
     {name:"r/thick_hentai", url:"https://reddit.com/r/thick_hentai"},
-    {name:"r/GayFurryPorn1", url:"https://reddit.com/r/GayFurryPorn1"}
+    {name:"r/GayFurryPorn1", url:"https://reddit.com/r/GayFurryPorn1"},
+    // Extra high-quality hentai suggestions
+    {name:"r/HentaiSource", url:"https://reddit.com/r/HentaiSource"},
+    {name:"r/Offensivejokes", url:"https://reddit.com/r/Offensivejokes"},
+    {name:"r/wholesomehentai", url:"https://reddit.com/r/wholesomehentai"},
+    {name:"r/HentaiManga", url:"https://reddit.com/r/HentaiManga"},
+    {name:"r/Artistic_Hentai", url:"https://reddit.com/r/Artistic_Hentai"},
+    {name:"r/3DHentai", url:"https://reddit.com/r/3DHentai"},
+    {name:"r/MonsterGirl", url:"https://reddit.com/r/MonsterGirl"},
+    {name:"r/yuri", url:"https://reddit.com/r/yuri"},
+    {name:"r/yaoi", url:"https://reddit.com/r/yaoi"},
+    {name:"r/netorare", url:"https://reddit.com/r/netorare"},
+    {name:"r/ahegao", url:"https://reddit.com/r/ahegao"},
+    {name:"r/hentaicaptions", url:"https://reddit.com/r/hentaicaptions"},
+    {name:"r/HentaiPetplay", url:"https://reddit.com/r/HentaiPetplay"},
+    {name:"r/helplesshentai", url:"https://reddit.com/r/helplesshentai"},
+    {name:"r/HentaiBreathPlay", url:"https://reddit.com/r/HentaiBreathPlay"},
+    {name:"r/public_hentai", url:"https://reddit.com/r/public_hentai"},
+    {name:"r/HentaiSchoolgirl", url:"https://reddit.com/r/HentaiSchoolgirl"},
+    {name:"r/milfhentai", url:"https://reddit.com/r/milfhentai"}
   ]
 };
 
@@ -130,6 +158,14 @@ function updateStats() {
   if (t) t.textContent = tabsOpened;
 }
 
+function resetStats() {
+  sessionCount = 0;
+  tabsOpened = 0;
+  saveStats();
+  updateStats();
+  log('Counters reset');
+}
+
 function randomFrom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -146,7 +182,7 @@ function openRandom(category) {
   openSub(pick.url, pick.name);
 }
 
-// Staggered opens to reduce popup blocker issues
+// Staggered opens
 function openMultiple(category, count) {
   let pool = category === 'all' 
     ? [].concat(...Object.values(allSubs))
@@ -154,12 +190,12 @@ function openMultiple(category, count) {
   pool = [...pool].sort(() => Math.random() - 0.5);
   const picks = pool.slice(0, Math.min(count, pool.length));
 
-  log(`Launching ${picks.length} tabs (staggered)... Allow popups if asked!`);
+  log(`Launching ${picks.length} tabs (staggered 450ms)... Allow popups!`);
 
   picks.forEach((p, i) => {
     setTimeout(() => {
       openSub(p.url, p.name);
-    }, i * 400); // 400ms between each open
+    }, i * 450);
   });
 }
 
@@ -185,11 +221,12 @@ function downloadList(category) {
   log(`Downloaded ${category} list`);
 }
 
-// Simple ambient drone using Web Audio API
+// Ambient drone - now louder + volume control
 let audioCtx = null;
 let oscillator = null;
 let gainNode = null;
 let isPlaying = false;
+let currentVolume = 0.14; // louder default
 
 function toggleAudio() {
   if (!audioCtx) {
@@ -197,15 +234,15 @@ function toggleAudio() {
     oscillator = audioCtx.createOscillator();
     gainNode = audioCtx.createGain();
     oscillator.type = 'sine';
-    oscillator.frequency.value = 55;
-    gainNode.gain.value = 0.03;
+    oscillator.frequency.value = 52;
+    gainNode.gain.value = currentVolume;
     oscillator.connect(gainNode);
     gainNode.connect(audioCtx.destination);
     oscillator.start();
     isPlaying = true;
     const btn = document.getElementById('audio-btn');
     if (btn) btn.textContent = 'Stop Ambient Drone';
-    log('Ambient drone started (very quiet low tone)');
+    log('Ambient drone ON (louder)');
   } else {
     if (isPlaying) {
       gainNode.gain.value = 0;
@@ -214,13 +251,21 @@ function toggleAudio() {
       if (btn) btn.textContent = 'Start Ambient Drone';
       log('Ambient drone muted');
     } else {
-      gainNode.gain.value = 0.03;
+      gainNode.gain.value = currentVolume;
       isPlaying = true;
       const btn = document.getElementById('audio-btn');
       if (btn) btn.textContent = 'Stop Ambient Drone';
       log('Ambient drone resumed');
     }
   }
+}
+
+function setDroneVolume(val) {
+  currentVolume = parseFloat(val);
+  if (gainNode && isPlaying) {
+    gainNode.gain.value = currentVolume;
+  }
+  log('Drone volume: ' + Math.round(currentVolume * 100) + '%');
 }
 
 function renderCards(category, containerId) {
@@ -238,7 +283,6 @@ function renderCards(category, containerId) {
   });
 }
 
-// On every page load, refresh the visible counters
 document.addEventListener('DOMContentLoaded', () => {
   loadStats();
   updateStats();
