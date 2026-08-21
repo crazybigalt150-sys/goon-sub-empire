@@ -3,17 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GOON SUB EMPIRE — Interactive Hub</title>
+<title>GOON SUB EMPIRE</title>
 <link rel="stylesheet" href="style.css">
 <style>
-  html, body { background: #0b0b10 !important; background-color: #0b0b10 !important; }
-  body { background: #0b0b10 !important; }
+  html,body{background:#0b0b10!important;background-color:#0b0b10!important;}
+  #goon-meter{background:#1a1a28;border:1px solid #ff2d7855;border-radius:6px;height:28px;margin:12px 0;overflow:hidden;position:relative}
+  #goon-meter-fill{height:100%;background:linear-gradient(90deg,#00f0ff,#ff2d78);width:0%;transition:width 0.4s;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:600;color:#000}
+  #mantra{font-size:1.3rem;color:var(--accent);text-align:center;margin:18px 0;min-height:1.6em;letter-spacing:1px}
+  #fallback-box{display:none;margin-top:15px;padding:15px;background:#0a0a12;border:1px dashed #ff2d78}
 </style>
 </head>
 <body style="background:#0b0b10">
 <header>
   <h1>GOON SUB EMPIRE</h1>
-  <div class="tagline">FULL SESSION COMMAND CENTER — HENTAI / FEMBOY / FEET / ASS</div>
+  <div class="tagline">v5 — LOUDER • DEEPER • MORE</div>
 </header>
 
 <nav>
@@ -28,91 +31,82 @@
 <main>
   <div class="panel">
     <h2>SESSION DASHBOARD</h2>
+    <div id="mantra">Just one more tab...</div>
+
     <div class="stat-bar">
       <div>Actions: <span id="stat-session">0</span></div>
       <div>Tabs: <span id="stat-tabs">0</span></div>
-      <div>Time in session: <span id="session-timer">0 min</span></div>
-      <button class="btn btn-secondary" style="padding:6px 12px;font-size:0.9rem" onclick="resetStats()">Reset Counters</button>
-      <button class="btn btn-secondary" style="padding:6px 12px;font-size:0.9rem" onclick="resetTimer()">Reset Timer</button>
+      <div>Time: <span id="session-timer">0 min</span></div>
+      <button class="btn btn-secondary" style="padding:5px 10px;font-size:0.85rem" onclick="resetStats()">Reset</button>
+      <button class="btn btn-secondary" style="padding:5px 10px;font-size:0.85rem" onclick="resetTimer()">Reset Timer</button>
     </div>
 
-    <div class="btn-row">
-      <button class="btn" onclick="openRandom('all')">RANDOM SUB</button>
-      <button class="btn" onclick="openMultiple('all', 5)">OPEN 5 TABS</button>
-      <button class="btn" onclick="openMultiple('all', 10)">OPEN 10 (CHAOS)</button>
-    </div>
+    <div id="goon-meter"><div id="goon-meter-fill">0%</div></div>
+    <p class="note" style="margin-top:4px">Goon Meter rises with every tab you open</p>
 
     <div class="btn-row">
-      <button class="btn" onclick="openRandom('feet')">Random Feet</button>
-      <button class="btn" onclick="openRandom('booty')">Random Booty</button>
-      <button class="btn" onclick="openRandom('femboy')">Random Femboy</button>
-      <button class="btn" onclick="openRandom('futa')">Random Futa</button>
-      <button class="btn" onclick="openRandom('goon')">Random Goon</button>
+      <button class="btn" onclick="openRandom('all')">RANDOM</button>
+      <button class="btn" onclick="openMultiple('all',5)">5 TABS</button>
+      <button class="btn" onclick="openMultiple('all',10)">10 TABS</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="openRandom('feet')">Feet</button>
+      <button class="btn" onclick="openRandom('booty')">Booty</button>
+      <button class="btn" onclick="openRandom('femboy')">Femboy</button>
+      <button class="btn" onclick="openRandom('futa')">Futa</button>
+      <button class="btn" onclick="openRandom('goon')">Goon</button>
     </div>
 
     <div class="audio-controls">
       <button class="btn btn-secondary" id="audio-btn" onclick="toggleAudio()">Start Ambient Drone</button>
-      <label style="color:#aaa">Volume 
-        <input type="range" min="0.05" max="0.55" step="0.01" value="0.28" oninput="setDroneVolume(this.value)">
-        <span id="vol-label">28%</span>
+      <label style="color:#aaa">Volume
+        <input type="range" min="0.05" max="1.5" step="0.05" value="0.45" oninput="setDroneVolume(this.value)">
+        <span id="vol-label">45%</span>
       </label>
     </div>
-    <p class="note">Drone is much louder and now <strong>auto-resumes on every page</strong> if you left it on. Max volume is significantly higher.</p>
+    <p class="note">Volume now goes <strong>way</strong> higher (up to 150%). Drone remembers across pages.</p>
 
     <div id="log"></div>
+    <div id="fallback-box"></div>
   </div>
 
-  <!-- THE BIG MISSING PIECE -->
   <div class="panel">
     <h2>ONE-CLICK SESSION MODES</h2>
-    <p style="color:#aaa;margin-bottom:12px">These are the “something big” buttons. They launch curated multi-tab sets so you don’t have to think.</p>
+    <p style="color:#aaa;margin-bottom:10px">If auto-open gets blocked, a clickable list appears below so you can still open everything fast.</p>
     <div class="btn-row">
-      <button class="btn" onclick="emergencyDeepDive()" style="background:#ff0044">EMERGENCY DEEP DIVE (8 heavy)</button>
-      <button class="btn" onclick="softLoop()">SOFT LOOP (6 easy)</button>
-      <button class="btn" onclick="femboyFocus()">FEMBOY FOCUS (7 tabs)</button>
-      <button class="btn btn-secondary" onclick="openMultiple('general', 6)">GENERAL HENTAI DUMP</button>
-    </div>
-    <p class="note">Deep Dive = gooning + heavy femboy + netorare/ahegao/petplay style subs.<br>
-    Soft Loop = feet + booty + wholesome/petite/ecchi.</p>
-  </div>
-
-  <div class="panel">
-    <h2>QUICK CATEGORY JUMPS</h2>
-    <div class="btn-row">
-      <a href="feet.html"><button class="btn">FEET VAULT →</button></a>
-      <a href="booty.html"><button class="btn">BOOTY / ASS →</button></a>
-      <a href="femboy.html"><button class="btn">FEMBOY + FUTA →</button></a>
-      <a href="goon.html"><button class="btn">GOONING ZONE →</button></a>
-      <a href="downloads.html"><button class="btn btn-secondary">DOWNLOAD LISTS →</button></a>
+      <button class="btn" style="background:#ff0044" onclick="emergencyDeepDive()">DEEP DIVE (heavy)</button>
+      <button class="btn" onclick="softLoop()">SOFT LOOP</button>
+      <button class="btn" onclick="femboyFocus()">FEMBOY FOCUS</button>
+      <button class="btn btn-secondary" onclick="openMultiple('general',7)">HENTAI DUMP</button>
     </div>
   </div>
 
   <div class="panel">
-    <h2>HOW TO RUN A LONG SESSION</h2>
-    <ul style="margin-left:20px;color:#ccc">
-      <li>Turn the drone on and raise the volume until it feels good</li>
-      <li>Hit one of the Session Mode buttons above</li>
-      <li>When tabs start feeling stale, hit another mode or Chaos 10</li>
-      <li>Leave this hub open — the drone will keep trying to stay alive across pages</li>
-      <li>Download the lists so you always have the full archive offline</li>
+    <h2>CATEGORY PAGES</h2>
+    <div class="btn-row">
+      <a href="feet.html"><button class="btn">FEET →</button></a>
+      <a href="booty.html"><button class="btn">BOOTY →</button></a>
+      <a href="femboy.html"><button class="btn">FEMBOY+FUTA →</button></a>
+      <a href="goon.html"><button class="btn">GOONING →</button></a>
+      <a href="downloads.html"><button class="btn btn-secondary">DOWNLOADS →</button></a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>KEEP GOING</h2>
+    <ul style="margin-left:18px;color:#ccc">
+      <li>Crank the drone until it fills the room</li>
+      <li>Watch the Goon Meter climb</li>
+      <li>When tabs feel stale → hit a Session Mode again</li>
+      <li>The mantra at the top changes every few seconds — listen to it</li>
+      <li>Leave this page open. The drone will try to stay with you.</li>
     </ul>
-  </div>
-
-  <div class="panel">
-    <h2>ARCHIVE SIZE</h2>
-    <p>90+ hentai / femboy / feet / booty / gooning subreddits curated and ready.</p>
-    <p style="color:var(--accent2)">This is now a full command center, not just a directory.</p>
   </div>
 </main>
 
-<footer>
-  GOON SUB EMPIRE v4 — persistent drone + session modes + timer<br>
-  Stay inside.
-</footer>
+<footer>GOON SUB EMPIRE v5 — we keep adding until it feels right<br>Stay.</footer>
 
 <script src="app.js"></script>
-<script>
-  log('Empire v4 online. Louder persistent drone + Deep Dive modes ready.');
-</script>
+<script>log('v5 online. Extreme volume + Goon Meter + mantras + better session fallback.');</script>
 </body>
 </html>
