@@ -5,12 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GOON SUB EMPIRE — Interactive Hub</title>
 <link rel="stylesheet" href="style.css">
-<style>html,body{background:#0b0b10!important;}</style>
+<style>
+  html, body { background: #0b0b10 !important; background-color: #0b0b10 !important; }
+  body { background: #0b0b10 !important; }
+</style>
 </head>
-<body>
+<body style="background:#0b0b10">
 <header>
   <h1>GOON SUB EMPIRE</h1>
-  <div class="tagline">YOUR PERSONAL INTERACTIVE HENTAI / FEMBOY / FEET / ASS COMMAND CENTER</div>
+  <div class="tagline">FULL SESSION COMMAND CENTER — HENTAI / FEMBOY / FEET / ASS</div>
 </header>
 
 <nav>
@@ -26,15 +29,17 @@
   <div class="panel">
     <h2>SESSION DASHBOARD</h2>
     <div class="stat-bar">
-      <div>Actions this session: <span id="stat-session">0</span></div>
-      <div>Tabs opened: <span id="stat-tabs">0</span></div>
+      <div>Actions: <span id="stat-session">0</span></div>
+      <div>Tabs: <span id="stat-tabs">0</span></div>
+      <div>Time in session: <span id="session-timer">0 min</span></div>
       <button class="btn btn-secondary" style="padding:6px 12px;font-size:0.9rem" onclick="resetStats()">Reset Counters</button>
+      <button class="btn btn-secondary" style="padding:6px 12px;font-size:0.9rem" onclick="resetTimer()">Reset Timer</button>
     </div>
 
     <div class="btn-row">
-      <button class="btn" onclick="openRandom('all')">RANDOM SUB (ANY)</button>
-      <button class="btn" onclick="openMultiple('all', 5)">OPEN 5 RANDOM TABS</button>
-      <button class="btn btn-secondary" onclick="openMultiple('all', 10)">OPEN 10 TABS (CHAOS)</button>
+      <button class="btn" onclick="openRandom('all')">RANDOM SUB</button>
+      <button class="btn" onclick="openMultiple('all', 5)">OPEN 5 TABS</button>
+      <button class="btn" onclick="openMultiple('all', 10)">OPEN 10 (CHAOS)</button>
     </div>
 
     <div class="btn-row">
@@ -47,18 +52,32 @@
 
     <div class="audio-controls">
       <button class="btn btn-secondary" id="audio-btn" onclick="toggleAudio()">Start Ambient Drone</button>
-      <label style="color:#aaa;font-size:0.95rem">Volume:
-        <input type="range" min="0.02" max="0.35" step="0.01" value="0.14" oninput="setDroneVolume(this.value)" style="vertical-align:middle;width:120px">
+      <label style="color:#aaa">Volume 
+        <input type="range" min="0.05" max="0.55" step="0.01" value="0.28" oninput="setDroneVolume(this.value)">
+        <span id="vol-label">28%</span>
       </label>
     </div>
-    <p class="note">Drone is louder now. First time you use multi-tab buttons, allow popups when the browser asks.</p>
+    <p class="note">Drone is much louder and now <strong>auto-resumes on every page</strong> if you left it on. Max volume is significantly higher.</p>
 
     <div id="log"></div>
   </div>
 
+  <!-- THE BIG MISSING PIECE -->
+  <div class="panel">
+    <h2>ONE-CLICK SESSION MODES</h2>
+    <p style="color:#aaa;margin-bottom:12px">These are the “something big” buttons. They launch curated multi-tab sets so you don’t have to think.</p>
+    <div class="btn-row">
+      <button class="btn" onclick="emergencyDeepDive()" style="background:#ff0044">EMERGENCY DEEP DIVE (8 heavy)</button>
+      <button class="btn" onclick="softLoop()">SOFT LOOP (6 easy)</button>
+      <button class="btn" onclick="femboyFocus()">FEMBOY FOCUS (7 tabs)</button>
+      <button class="btn btn-secondary" onclick="openMultiple('general', 6)">GENERAL HENTAI DUMP</button>
+    </div>
+    <p class="note">Deep Dive = gooning + heavy femboy + netorare/ahegao/petplay style subs.<br>
+    Soft Loop = feet + booty + wholesome/petite/ecchi.</p>
+  </div>
+
   <div class="panel">
     <h2>QUICK CATEGORY JUMPS</h2>
-    <p style="color:#aaa;margin-bottom:12px">Each category page has the full list + more tools.</p>
     <div class="btn-row">
       <a href="feet.html"><button class="btn">FEET VAULT →</button></a>
       <a href="booty.html"><button class="btn">BOOTY / ASS →</button></a>
@@ -69,34 +88,31 @@
   </div>
 
   <div class="panel">
-    <h2>HOW TO USE THIS EMPIRE</h2>
+    <h2>HOW TO RUN A LONG SESSION</h2>
     <ul style="margin-left:20px;color:#ccc">
-      <li>Use the random buttons to keep novelty high</li>
-      <li>Open 5–10 tabs when you feel the session slowing</li>
-      <li>Visit category pages for focused deep dives</li>
-      <li>Download the full lists so you have them offline</li>
-      <li>Leave this hub open as your command center</li>
-      <li>Turn the drone on + raise volume for brain-melt background</li>
-      <li>Reset counters anytime if you want a fresh session number</li>
+      <li>Turn the drone on and raise the volume until it feels good</li>
+      <li>Hit one of the Session Mode buttons above</li>
+      <li>When tabs start feeling stale, hit another mode or Chaos 10</li>
+      <li>Leave this hub open — the drone will keep trying to stay alive across pages</li>
+      <li>Download the lists so you always have the full archive offline</li>
     </ul>
   </div>
 
   <div class="panel">
-    <h2>LIVE COUNT OF YOUR SUBS (+ EXTRA HENTAI)</h2>
-    <p>Feet • Booty • Femboy • Futa • Goon • General (now includes many more pure hentai subs: MonsterGirl, netorare, ahegao, yuri, wholesomehentai, HentaiSource, captions, petplay, schoolgirl, milf, etc.)</p>
-    <p style="color:var(--accent2);margin-top:8px">Total curated: 90+ subreddits ready</p>
+    <h2>ARCHIVE SIZE</h2>
+    <p>90+ hentai / femboy / feet / booty / gooning subreddits curated and ready.</p>
+    <p style="color:var(--accent2)">This is now a full command center, not just a directory.</p>
   </div>
 </main>
 
 <footer>
-  GOON SUB EMPIRE — built from your personal list + extra hentai suggestions<br>
-  Interactive tools + downloadable archives + multi-page deep dives<br>
-  Stay in the empire.
+  GOON SUB EMPIRE v4 — persistent drone + session modes + timer<br>
+  Stay inside.
 </footer>
 
 <script src="app.js"></script>
 <script>
-  log('Empire online (v3). Louder drone + more hentai subs loaded.');
+  log('Empire v4 online. Louder persistent drone + Deep Dive modes ready.');
 </script>
 </body>
 </html>
