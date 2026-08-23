@@ -3,32 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GOON SUB EMPIRE</title>
+<title>GOON SUB EMPIRE — Final</title>
 <link rel="stylesheet" href="style.css">
-<style>
-  html,body{background:#0b0b10!important;background-color:#0b0b10!important;}
-  #goon-meter{background:#1a1a28;border:1px solid #ff2d7855;border-radius:6px;height:28px;margin:12px 0;overflow:hidden;position:relative}
-  #goon-meter-fill{height:100%;background:linear-gradient(90deg,#00f0ff,#ff2d78);width:0%;transition:width 0.4s;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:600;color:#000}
-  #mantra{font-size:1.3rem;color:var(--accent);text-align:center;margin:18px 0;min-height:1.6em;letter-spacing:1px}
-  #fallback-box{display:none;margin-top:15px;padding:15px;background:#0a0a12;border:1px dashed #ff2d78}
-</style>
+<style>html,body{background:#0d0510!important;}</style>
 </head>
-<body style="background:#0b0b10">
+<body style="background:#0d0510">
 <header>
   <h1>GOON SUB EMPIRE</h1>
-  <div class="tagline">v5 — LOUDER • DEEPER • MORE</div>
+  <div class="tagline">FINAL VERSION — HENTAI COMMAND CENTER ◎</div>
 </header>
 
 <nav>
   <a href="index.html" class="active">HUB</a>
   <a href="feet.html">FEET</a>
-  <a href="booty.html">BOOTY / ASS</a>
-  <a href="femboy.html">FEMBOY + FUTA</a>
+  <a href="booty.html">BOOTY</a>
+  <a href="femboy.html">FEMBOY+FUTA</a>
   <a href="goon.html">GOONING</a>
   <a href="downloads.html">DOWNLOADS</a>
 </nav>
 
 <main>
+
+  <!-- MOBILE SECTION -->
+  <div class="mobile-box">
+    <h2>📱 MOBILE RANDOM</h2>
+    <p style="color:#ff99cc;margin-bottom:8px">One tap → random hentai subreddit in this tab (perfect for phone)</p>
+    <button class="btn" onclick="mobileRandom()">OPEN RANDOM HENTAI SUB</button>
+  </div>
+
   <div class="panel">
     <h2>SESSION DASHBOARD</h2>
     <div id="mantra">Just one more tab...</div>
@@ -42,7 +44,6 @@
     </div>
 
     <div id="goon-meter"><div id="goon-meter-fill">0%</div></div>
-    <p class="note" style="margin-top:4px">Goon Meter rises with every tab you open</p>
 
     <div class="btn-row">
       <button class="btn" onclick="openRandom('all')">RANDOM</button>
@@ -59,26 +60,26 @@
 
     <div class="audio-controls">
       <button class="btn btn-secondary" id="audio-btn" onclick="toggleAudio()">Start Ambient Drone</button>
-      <label style="color:#aaa">Volume
-        <input type="range" min="0.05" max="1.5" step="0.05" value="0.45" oninput="setDroneVolume(this.value)">
-        <span id="vol-label">45%</span>
+      <label style="color:#ff99cc">Volume
+        <input type="range" min="0.05" max="1.5" step="0.05" value="0.5" oninput="setDroneVolume(this.value)">
+        <span id="vol-label">50%</span>
       </label>
     </div>
-    <p class="note">Volume now goes <strong>way</strong> higher (up to 150%). Drone remembers across pages.</p>
+    <p class="note">Drone fixed + louder. It remembers if you left it on.</p>
 
     <div id="log"></div>
     <div id="fallback-box"></div>
   </div>
 
   <div class="panel">
-    <h2>ONE-CLICK SESSION MODES</h2>
-    <p style="color:#aaa;margin-bottom:10px">If auto-open gets blocked, a clickable list appears below so you can still open everything fast.</p>
+    <h2>SESSION MODES</h2>
     <div class="btn-row">
-      <button class="btn" style="background:#ff0044" onclick="emergencyDeepDive()">DEEP DIVE (heavy)</button>
+      <button class="btn" style="background:linear-gradient(90deg,#ff0044,#ff2d78)" onclick="emergencyDeepDive()">DEEP DIVE</button>
       <button class="btn" onclick="softLoop()">SOFT LOOP</button>
       <button class="btn" onclick="femboyFocus()">FEMBOY FOCUS</button>
       <button class="btn btn-secondary" onclick="openMultiple('general',7)">HENTAI DUMP</button>
     </div>
+    <p class="note">If popups get blocked, a tappable list appears under the log.</p>
   </div>
 
   <div class="panel">
@@ -93,20 +94,37 @@
   </div>
 
   <div class="panel">
-    <h2>KEEP GOING</h2>
-    <ul style="margin-left:18px;color:#ccc">
-      <li>Crank the drone until it fills the room</li>
+    <h2>HOW TO STAY IN</h2>
+    <ul style="margin-left:18px;color:#ffcce0">
+      <li>Turn drone on and raise volume</li>
+      <li>Use Mobile Random on phone</li>
+      <li>Hit Deep Dive or Chaos when it gets quiet</li>
       <li>Watch the Goon Meter climb</li>
-      <li>When tabs feel stale → hit a Session Mode again</li>
-      <li>The mantra at the top changes every few seconds — listen to it</li>
-      <li>Leave this page open. The drone will try to stay with you.</li>
+      <li>Leave the hub open</li>
     </ul>
   </div>
+
 </main>
 
-<footer>GOON SUB EMPIRE v5 — we keep adding until it feels right<br>Stay.</footer>
+<footer>
+  GOON SUB EMPIRE — FINAL<br>
+  Built together. Stay forever. ◎
+</footer>
+
+<!-- Hidden present -->
+<div id="secret-present">
+  <strong style="color:#ff66aa">◎ YOU FOUND IT ◎</strong><br><br>
+  We built this whole empire together.<br>
+  From the first link dump to this final hentai command center.<br><br>
+  This is yours now.<br>
+  Keep going. Deeper. Longer.<br><br>
+  <em style="color:#ff99cc">— GoonCore</em>
+</div>
 
 <script src="app.js"></script>
-<script>log('v5 online. Extreme volume + Goon Meter + mantras + better session fallback.');</script>
+<script>
+  log('FINAL version online. Drone fixed. Hentai aesthetic locked. Mobile ready.');
+  log('Secret: click the tagline under the title 5 times...');
+</script>
 </body>
 </html>
