@@ -3,59 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GOON SUB EMPIRE — Final</title>
+<title>GOON SUB EMPIRE</title>
 <link rel="stylesheet" href="style.css">
 <style>html,body{background:#0d0510!important;}</style>
 </head>
 <body style="background:#0d0510">
 <header>
   <h1>GOON SUB EMPIRE</h1>
-  <div class="tagline">FINAL VERSION — HENTAI COMMAND CENTER ◎</div>
+  <div class="tagline">TWO HUBS • HARDCORE GOON • CRINGE ◎</div>
 </header>
 
 <nav>
-  <a href="index.html" class="active">HUB</a>
-  <a href="feet.html">FEET</a>
-  <a href="booty.html">BOOTY</a>
-  <a href="femboy.html">FEMBOY+FUTA</a>
-  <a href="goon.html">GOONING</a>
-  <a href="sites.html">PORN SITES</a>
-  <a href="downloads.html">DOWNLOADS</a>
+  <a href="index.html" class="active">REDDIT HUB</a>
+  <a href="sites.html">PORN SITES HUB</a>
 </nav>
 
 <main>
 
   <div class="mobile-box">
     <h2>📱 MOBILE RANDOM</h2>
-    <p style="color:#ff99cc;margin-bottom:8px">One tap → random hentai subreddit in this tab (perfect for phone)</p>
-    <button class="btn" onclick="mobileRandom()">OPEN RANDOM HENTAI SUB</button>
+    <p style="color:#ff99cc;margin-bottom:8px">One tap → random Reddit goon sub (phone friendly)</p>
+    <button class="btn" onclick="mobileRandom()">OPEN RANDOM SUB</button>
   </div>
 
   <div class="panel">
     <h2>SESSION DASHBOARD</h2>
     <div id="mantra">Just one more tab...</div>
-
     <div class="stat-bar">
       <div>Actions: <span id="stat-session">0</span></div>
       <div>Tabs: <span id="stat-tabs">0</span></div>
       <div>Time: <span id="session-timer">0 min</span></div>
       <button class="btn btn-secondary" style="padding:5px 10px;font-size:0.85rem" onclick="resetStats()">Reset</button>
-      <button class="btn btn-secondary" style="padding:5px 10px;font-size:0.85rem" onclick="resetTimer()">Reset Timer</button>
     </div>
-
     <div id="goon-meter"><div id="goon-meter-fill">0%</div></div>
 
     <div class="btn-row">
-      <button class="btn" onclick="openRandom('all')">RANDOM</button>
+      <button class="btn" onclick="openRandom('all')">RANDOM ANY</button>
       <button class="btn" onclick="openMultiple('all',5)">5 TABS</button>
       <button class="btn" onclick="openMultiple('all',10)">10 TABS</button>
     </div>
     <div class="btn-row">
+      <button class="btn" onclick="openRandom('goon')">Hardcore Goon / Cringe</button>
+      <button class="btn" onclick="openRandom('femboy')">Femboy</button>
       <button class="btn" onclick="openRandom('feet')">Feet</button>
       <button class="btn" onclick="openRandom('booty')">Booty</button>
-      <button class="btn" onclick="openRandom('femboy')">Femboy</button>
-      <button class="btn" onclick="openRandom('futa')">Futa</button>
-      <button class="btn" onclick="openRandom('goon')">Goon (incl MLP)</button>
     </div>
 
     <div class="audio-controls">
@@ -65,10 +56,35 @@
         <span id="vol-label">50%</span>
       </label>
     </div>
-    <p class="note">Drone fixed + louder. It remembers if you left it on.</p>
 
     <div id="log"></div>
     <div id="fallback-box"></div>
+  </div>
+
+  <div class="panel">
+    <h2>HARDCORE GOON / CRINGE</h2>
+    <p style="color:#ff99cc;margin-bottom:12px">The pure goon fuel — cringe, edging, gooning, a bit of MLP where it still exists</p>
+    <div class="grid" id="goon-grid"></div>
+  </div>
+
+  <div class="panel">
+    <h2>FEMBOY + FUTA</h2>
+    <div class="grid" id="femboy-grid"></div>
+  </div>
+
+  <div class="panel">
+    <h2>FEET</h2>
+    <div class="grid" id="feet-grid"></div>
+  </div>
+
+  <div class="panel">
+    <h2>BOOTY / ASS</h2>
+    <div class="grid" id="booty-grid"></div>
+  </div>
+
+  <div class="panel">
+    <h2>GENERAL HENTAI</h2>
+    <div class="grid" id="general-grid"></div>
   </div>
 
   <div class="panel">
@@ -77,52 +93,31 @@
       <button class="btn" style="background:linear-gradient(90deg,#ff0044,#ff2d78)" onclick="emergencyDeepDive()">DEEP DIVE</button>
       <button class="btn" onclick="softLoop()">SOFT LOOP</button>
       <button class="btn" onclick="femboyFocus()">FEMBOY FOCUS</button>
-      <button class="btn btn-secondary" onclick="openMultiple('general',7)">HENTAI DUMP</button>
-    </div>
-    <p class="note">If popups get blocked, a tappable list appears under the log.</p>
-  </div>
-
-  <div class="panel">
-    <h2>TWO BIG SECTIONS</h2>
-    <div class="btn-row">
-      <a href="goon.html"><button class="btn">REDDIT GOON SIDE →</button></a>
-      <a href="sites.html"><button class="btn">PORN WEBSITES HUB →</button></a>
-    </div>
-    <p class="note">Reddit = specialized (including MLP/clop hardcore goon now)<br>Porn Sites = the big general tubes + hentai sites</p>
-  </div>
-
-  <div class="panel">
-    <h2>CATEGORY PAGES</h2>
-    <div class="btn-row">
-      <a href="feet.html"><button class="btn">FEET →</button></a>
-      <a href="booty.html"><button class="btn">BOOTY →</button></a>
-      <a href="femboy.html"><button class="btn">FEMBOY+FUTA →</button></a>
-      <a href="goon.html"><button class="btn">GOONING (+MLP) →</button></a>
-      <a href="sites.html"><button class="btn">PORN SITES →</button></a>
-      <a href="downloads.html"><button class="btn btn-secondary">DOWNLOADS →</button></a>
     </div>
   </div>
 
 </main>
 
 <footer>
-  GOON SUB EMPIRE — FINAL + MLP + SITES HUB<br>
-  Built together. Stay forever. ◎
+  GOON SUB EMPIRE — Reddit Hub<br>
+  Switch to <a href="sites.html" style="color:#ff66aa">PORN SITES HUB</a> for the big website list ◎
 </footer>
 
 <div id="secret-present">
   <strong style="color:#ff66aa">◎ YOU FOUND IT ◎</strong><br><br>
-  We built this whole empire together.<br>
-  From the first link dump to this final hentai command center.<br><br>
-  This is yours now.<br>
-  Keep going. Deeper. Longer.<br><br>
+  We built this whole thing together.<br>
+  Keep going. Deeper.<br><br>
   <em style="color:#ff99cc">— GoonCore</em>
 </div>
 
 <script src="app.js"></script>
 <script>
-  log('v7 online. MLP/clop added to Goon + full Porn Sites Hub.');
-  log('Secret: click the tagline 5 times...');
+  renderCards('goon','goon-grid');
+  renderCards('femboy','femboy-grid');
+  renderCards('feet','feet-grid');
+  renderCards('booty','booty-grid');
+  renderCards('general','general-grid');
+  log('v8 online. Banned MLP removed. Hardcore/cringe goon kept. Two-hub structure.');
 </script>
 </body>
 </html>
