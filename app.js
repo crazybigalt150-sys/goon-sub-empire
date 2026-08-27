@@ -1,4 +1,4 @@
-// Goon Sub Empire FINAL v6
+// Goon Sub Empire v7 - MLP goon + sites hub
 
 const allSubs = {
   feet: [
@@ -63,7 +63,16 @@ const allSubs = {
     {name:"r/GooningHentai",url:"https://reddit.com/r/GooningHentai"},
     {name:"r/HentaiiGooning",url:"https://reddit.com/r/HentaiiGooning"},
     {name:"r/cringe_porn",url:"https://reddit.com/r/cringe_porn"},
-    {name:"r/HentaiGooning",url:"https://reddit.com/r/HentaiGooning"}
+    {name:"r/HentaiGooning",url:"https://reddit.com/r/HentaiGooning"},
+    // MLP / Clop hardcore goon
+    {name:"r/clopclop",url:"https://reddit.com/r/clopclop"},
+    {name:"r/mylittleporn",url:"https://reddit.com/r/mylittleporn"},
+    {name:"r/MLPNSFW",url:"https://reddit.com/r/MLPNSFW"},
+    {name:"r/ponyporn",url:"https://reddit.com/r/ponyporn"},
+    {name:"r/clop",url:"https://reddit.com/r/clop"},
+    {name:"r/MyLittlePonyPorn",url:"https://reddit.com/r/MyLittlePonyPorn"},
+    {name:"r/ClopClopClop",url:"https://reddit.com/r/ClopClopClop"},
+    {name:"r/mlp_hentai",url:"https://reddit.com/r/mlp_hentai"}
   ],
   general: [
     {name:"r/anime_hentai",url:"https://reddit.com/r/anime_hentai"},
@@ -136,7 +145,6 @@ function openRandom(cat){
   openSub(p.url,p.name);
 }
 
-// Mobile-friendly: just navigate current tab (perfect for phone)
 function mobileRandom(){
   const pool=[].concat(...Object.values(allSubs));
   const p=randomFrom(pool);
@@ -191,7 +199,7 @@ function downloadList(cat){
   log('Downloaded '+cat);
 }
 
-// ===== FIXED LOUD DRONE =====
+// DRONE
 let audioCtx=null, osc=null, gain=null, isPlaying=false, currentVolume=0.5;
 
 function loadDronePrefs(){
@@ -313,7 +321,6 @@ function resetTimer(){
   log('Timer reset');
 }
 
-// Secret present
 function revealPresent(){
   const el = document.getElementById('secret-present');
   if(el){
@@ -331,12 +338,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   setInterval(rotateMantra, 11000);
   rotateMantra();
 
-  // secret: click the tagline 5 times
   let clicks = 0;
   const tag = document.querySelector('.tagline');
   if(tag){
     tag.style.cursor = 'pointer';
-    tag.title = '';
     tag.addEventListener('click', ()=>{
       clicks++;
       if(clicks >= 5){
