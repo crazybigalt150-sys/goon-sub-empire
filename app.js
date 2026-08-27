@@ -1,4 +1,4 @@
-// Goon Sub Empire v8 - cleaned + simplified
+// Goon Sub Empire v9 - exact cringe/goon list from user
 
 const allSubs = {
   feet: [
@@ -54,21 +54,23 @@ const allSubs = {
     {name:"r/FutaHentai",url:"https://reddit.com/r/FutaHentai"}
   ],
   goon: [
-    // Hardcore / cringe gooning core
-    {name:"r/CringeGoonTards",url:"https://reddit.com/r/CringeGoonTards"},
-    {name:"r/CringeSexualGoonSlop",url:"https://reddit.com/r/CringeSexualGoonSlop"},
-    {name:"r/GooningHentai",url:"https://reddit.com/r/GooningHentai"},
-    {name:"r/HentaiiGooning",url:"https://reddit.com/r/HentaiiGooning"},
+    // EXACT list from user screenshots only
+    {name:"r/MyLittlePonyNSFW",url:"https://reddit.com/r/MyLittlePonyNSFW"},
+    {name:"r/TrueClop",url:"https://reddit.com/r/TrueClop"},
     {name:"r/cringe_porn",url:"https://reddit.com/r/cringe_porn"},
-    {name:"r/HentaiGooning",url:"https://reddit.com/r/HentaiGooning"},
-    {name:"r/Gooning",url:"https://reddit.com/r/Gooning"},
-    {name:"r/gooncaves",url:"https://reddit.com/r/gooncaves"},
-    {name:"r/GOONED",url:"https://reddit.com/r/GOONED"},
-    {name:"r/edging",url:"https://reddit.com/r/edging"},
-    {name:"r/jerkofftoceleb",url:"https://reddit.com/r/jerkofftoceleb"},
-    // Safer / still active-ish MLP related (many pure ones get banned fast)
-    {name:"r/MLPAnthroFutaPoniez",url:"https://reddit.com/r/MLPAnthroFutaPoniez"},
-    {name:"r/MyLittlefetish",url:"https://reddit.com/r/MyLittlefetish"}
+    {name:"r/hentaigoons",url:"https://reddit.com/r/hentaigoons"},
+    {name:"r/mlpgoon",url:"https://reddit.com/r/mlpgoon"},
+    {name:"r/session_hentai",url:"https://reddit.com/r/session_hentai"},
+    {name:"r/ClopClop",url:"https://reddit.com/r/ClopClop"},
+    {name:"r/ClopsClops",url:"https://reddit.com/r/ClopsClops"},
+    {name:"r/CringeGoonTards",url:"https://reddit.com/r/CringeGoonTards"},
+    {name:"r/CringeLoserPorn",url:"https://reddit.com/r/CringeLoserPorn"},
+    {name:"r/CringeSexualGoonSlop",url:"https://reddit.com/r/CringeSexualGoonSlop"},
+    {name:"r/CringeTardGoonFuel2",url:"https://reddit.com/r/CringeTardGoonFuel2"},
+    {name:"r/CuteandFunnyArt",url:"https://reddit.com/r/CuteandFunnyArt"},
+    {name:"r/FeralClopClop",url:"https://reddit.com/r/FeralClopClop"},
+    {name:"r/GooningHentai",url:"https://reddit.com/r/GooningHentai"},
+    {name:"r/HentaiiGooning",url:"https://reddit.com/r/HentaiiGooning"}
   ],
   general: [
     {name:"r/anime_hentai",url:"https://reddit.com/r/anime_hentai"},
